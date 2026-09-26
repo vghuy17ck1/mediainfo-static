@@ -29,7 +29,7 @@ Checksums are in \`checksums.sha256\`.
 - Built from the official MediaInfo $version source release.
 - Same features as the official CLI builds, including URL input over HTTP, HTTPS, FTP and SFTP.
 - Linux binaries are statically linked with musl and run on any distribution.
-- Windows binaries only use system DLLs and need Windows 10 or later. Graph output loads Graphviz at runtime when it is installed, like the official build.
+- Windows binaries only use system DLLs and need Windows 10 or later.
 
 ## Libraries
 
