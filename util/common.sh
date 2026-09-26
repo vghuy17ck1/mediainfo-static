@@ -49,7 +49,9 @@ fetch() {
     mkdir -p "$CACHE_DIR"
     if [[ ! -f "$archive" ]]; then
         log "downloading ${url##*/}"
-        curl --fail --silent --show-error --location --retry 5 --retry-delay 3 -o "$archive.part" "$url"
+        # mediaarea.net sometimes drops the connection mid-transfer, so resume on every error.
+        curl --fail --silent --show-error --location --retry 10 --retry-delay 3 --retry-all-errors \
+            --continue-at - -o "$archive.part" "$url"
         mv "$archive.part" "$archive"
     fi
     if [[ "$sha256" != - ]]; then
