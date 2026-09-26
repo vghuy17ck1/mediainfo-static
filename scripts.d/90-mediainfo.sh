@@ -28,7 +28,8 @@ build_mediainfo() {
     fi
 
     autotools_build "$source_dir/ZenLib/Project/GNU/Library" --enable-static --disable-shared
-    autotools_build "$source_dir/MediaInfoLib/Project/GNU/Library" --enable-static --disable-shared \
+    # --enable-staticlibs makes libmediainfo-config report the static libcurl link flags to the CLI.
+    autotools_build "$source_dir/MediaInfoLib/Project/GNU/Library" --enable-static --disable-shared --enable-staticlibs \
         --with-libcurl="$PREFIX" --with-graphviz="$graphviz"
     refresh_config_scripts "$source_dir/MediaInfo/Project/GNU/CLI"
     (
