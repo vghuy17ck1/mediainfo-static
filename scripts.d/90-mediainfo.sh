@@ -22,6 +22,10 @@ build_mediainfo() {
         cli_libs=-lshell32
     fi
     fetch "$url" - "$source_dir"
+    if [[ "$TARGET_OS" == windows ]]; then
+        # size_t is never unsigned long on 64-bit Windows, but the check in old ZenLib releases says it is.
+        sed -i 's/size_t_is_long="yes"/size_t_is_long="no"/' "$source_dir/ZenLib/Project/GNU/Library/configure"
+    fi
 
     autotools_build "$source_dir/ZenLib/Project/GNU/Library" --enable-static --disable-shared
     autotools_build "$source_dir/MediaInfoLib/Project/GNU/Library" --enable-static --disable-shared \
